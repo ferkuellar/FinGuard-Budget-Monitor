@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>FinGuard Budget Monitor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>FinGuard Budget Monitor</h1>
+    <p>Sube tu archivo CSV de gastos y revisa tus totales por categoría.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>1. Subir archivo CSV</h2>
+      <form id="uploadForm">
+        <input type="file" id="csvFile" accept=".csv" required />
+        <button type="submit">Procesar CSV (modo local)</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>2. Resumen de gastos</h2>
+      <div id="summary"></div>
+    </section>
+
+    <section class="card">
+      <h2>3. Gastos por categoría</h2>
+      <table id="categoryTable">
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>Monto total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
