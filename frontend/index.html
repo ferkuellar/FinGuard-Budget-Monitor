@@ -2,40 +2,63 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>FinGuard Budget Monitor</title>
+  <title>FinGuard – Ingesta de Gastos a AWS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>FinGuard Budget Monitor</h1>
-    <p>Sube tu archivo CSV de gastos y revisa tus totales por categoría.</p>
-  </header>
+  <main class="container">
+    <header class="header">
+      <div>
+        <h1>FinGuard <span class="badge">Demo AWS</span></h1>
+        <p class="subtitle">
+          Sube un archivo <strong>CSV</strong> con tus gastos y se enviarán a
+          <strong>API Gateway → Lambda → DynamoDB</strong>.
+        </p>
+      </div>
+    </header>
 
-  <main>
+    <!-- Card de carga de archivo -->
     <section class="card">
-      <h2>1. Subir archivo CSV</h2>
-      <form id="uploadForm">
-        <input type="file" id="csvFile" accept=".csv" required />
-        <button type="submit">Procesar CSV (modo local)</button>
-      </form>
+      <h2>1. Selecciona tu archivo CSV</h2>
+
+      <label for="fileInput">Archivo CSV de gastos</label>
+      <input type="file" id="fileInput" accept=".csv" />
+
+      <p class="hint">
+        Formato esperado (encabezado obligatorio):<br />
+        <code>date,category,amount</code><br />
+        Ejemplo:<br />
+        <code>2025-01-01,Marketing,1200</code><br />
+        <code>2025-01-05,Operación,800</code>
+      </p>
+
+      <button id="uploadBtn">
+        ⬆ Enviar CSV a AWS
+      </button>
+
+      <div id="status" class="status">
+        Esperando archivo…
+      </div>
     </section>
 
+    <!-- Card de preview -->
     <section class="card">
-      <h2>2. Resumen de gastos</h2>
-      <div id="summary"></div>
+      <h2>2. Preview rápido de las filas procesadas</h2>
+      <div id="preview" class="preview">
+        Aún no se ha cargado ningún archivo.
+      </div>
     </section>
 
-    <section class="card">
-      <h2>3. Gastos por categoría</h2>
-      <table id="categoryTable">
-        <thead>
-          <tr>
-            <th>Categoría</th>
-            <th>Monto total</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <!-- Card de ayuda -->
+    <section class="card card--light">
+      <h2>Notas técnicas</h2>
+      <ul class="notes">
+        <li>Frontend estático (HTML + CSS + JS) desplegado en S3.</li>
+        <li>El botón llama a <code>POST /ingest</code> en API Gateway.</li>
+        <li>La Lambda agrega los montos por mes y categoría y los guarda en DynamoDB.</li>
+        <li>Tabla: <strong>FinGuardExpenses</strong> con claves <code>tenantId</code> y <code>yearMonthCategor</code>.</li>
+      </ul>
     </section>
   </main>
 
