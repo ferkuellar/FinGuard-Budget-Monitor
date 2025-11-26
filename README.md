@@ -27,28 +27,11 @@ Este proyecto implementa ese flujo end-to-end.
 
 **Diagrama lógico (alto nivel):**
 
-```text
-[Usuario] 
-    │
-    │ (HTTPS, navegador)
-    ▼
-[Amazon S3 Static Website Hosting]  (frontend: HTML + CSS + JS)
-    │
-    │ fetch POST /ingest (JSON)
-    ▼
-[Amazon API Gateway HTTP API]  (/ingest)
-    │
-    │ invocación Lambda (proxy)
-    ▼
-[AWS Lambda - FinGuardIngestFunction] (Python)
-    │
-    │ batch write
-    ▼
-[Amazon DynamoDB - Tabla FinGuardExpenses]
-    PK: tenantId (String)
-    SK: yearMonthCategor (String, ej. "2025-01#Marketing")
-    Atributo: totalAmount (Number)
-````
+<p align="center">
+  <img src="docs/finguardexpenses.png" 
+       alt="Arquitectura FinGuard - DynamoDB Expenses" 
+       style="width:40%; max-width:500px;">
+</p>
 
 **Características clave:**
 
