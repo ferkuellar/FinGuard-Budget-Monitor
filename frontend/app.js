@@ -1,6 +1,7 @@
 // URL base de tu API Gateway (stage $default)
-const API_BASE_URL = "https://a4opn7hce8.execute-api.us-east-1.amazonaws.com";
+const API_BASE_URL = "https://ls4xagyqt5.execute-api.us-east-1.amazonaws.com";
 const TENANT_ID = "empresa-demo";
+
 
 // Configuración de paginación
 const PAGE_SIZE = 10;
